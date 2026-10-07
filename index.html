@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="IA para Antenados: videoaulas curtas para usar inteligência artificial no dia a dia, sem complicação. Acesso imediato, garantia de 7 dias."
+    />
+    <title>IA para Antenados — Aprenda IA sem complicação</title>
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1281903030728284');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1281903030728284&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="wrap-wide nav__inner">
+        <a class="nav__brand" href="#topo">IA para Antenados</a>
+        <a class="nav__wa" id="nav-faq" href="#faq">
+          Dúvidas?
+        </a>
+      </div>
+    </header>
+
+    <main id="topo">
+      <div class="hero-pin">
+        <div class="hero-pin__sticky" id="hero-pin-sticky">
+          <!-- 1. Hero -->
+          <section class="hero" aria-labelledby="hero-title">
+            <div class="wrap hero__copy">
+              <p class="hero__badge">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="6" y="3" width="12" height="18" rx="2" />
+                  <path d="M10 17h4" />
+                </svg>
+                Aulas de 3–7 min · IA no celular
+              </p>
+              <h1 id="hero-title">
+                Você viu a TV ficar colorida. Agora é a vez de usar a
+                inteligência&nbsp;artificial.
+              </h1>
+              <p class="lede hero__lede">
+                Videoaulas de 3 a 7 minutos. Use a IA desde a primeira aula.
+              </p>
+            </div>
+
+            <div class="hero__media" id="vsl">
+              <div class="hero__poster-fallback" id="vsl-fallback" aria-hidden="true"></div>
+              <button type="button" class="vsl-play" id="vsl-play" aria-label="Toque para assistir o vídeo">
+                <span class="vsl-play__btn">
+                  <span class="vsl-play__icon" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" aria-hidden="true">
+                      <polygon points="2,1 11,6 2,11" />
+                    </svg>
+                  </span>
+                  Toque para assistir
+                </span>
+              </button>
+            </div>
+
+            <div class="hero__actions">
+              <a class="btn btn--cta btn--block js-checkout" href="#oferta">
+                Quero começar agora
+              </a>
+              <ul class="hero__trust" aria-label="Sinais de confiança">
+                <li class="hero__chip">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                  Pagamento seguro Hotmart
+                </li>
+                <li class="hero__chip">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3 2" />
+                  </svg>
+                  Garantia 7 dias
+                </li>
+                <li class="hero__chip">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 5h16v10H7l-3 3V5z" />
+                  </svg>
+                  Suporte no WhatsApp
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- 3. Story scroll -->
+      <section class="story-scroll" id="historia" aria-labelledby="story-title">
+        <h2 id="story-title" class="sr-only">Por que isso faz sentido para você</h2>
+
+        <div class="story-scroll__pin">
+          <div class="story-scroll__bg" aria-hidden="true">
+            <img
+              data-story-bg="0"
+              class="is-active"
+              src="assets/story/story-01-celular-facebook.jpg"
+              alt=""
+            />
+            <img
+              data-story-bg="1"
+              src="assets/story/story-02-mulher-celular.jpg"
+              alt=""
+            />
+            <img
+              data-story-bg="2"
+              src="assets/story/story-03-gravacao-aula.jpg"
+              alt=""
+            />
+          </div>
+
+          <div class="story-scroll__panels">
+            <article class="story-scroll__panel is-active" data-story-panel="0">
+              <div class="story-scroll__card">
+                <h3>Você já venceu a tecnologia</h3>
+                <p>
+                  Viu a TV ficar colorida, o telefone perder o fio, aprendeu a
+                  usar o WhatsApp e redes sociais por conta própria. A
+                  Inteligência Artificial é o próximo passo.
+                </p>
+              </div>
+            </article>
+
+            <article class="story-scroll__panel" data-story-panel="1">
+              <div class="story-scroll__card">
+                <h3>Até minha mãe dominou a IA</h3>
+                <p>
+                  Eu perdia a paciência ajudando minha mãe com a tecnologia. Até
+                  que ensinei ela a usar IA. Hoje, ela resolve tudo sozinha e
+                  ainda me ensina.
+                </p>
+              </div>
+            </article>
+
+            <article class="story-scroll__panel" data-story-panel="2">
+              <div class="story-scroll__card">
+                <h3>Quem vai te ensinar?</h3>
+                <p>
+                  Sou o Matheus Paiva, tenho 30 anos, sou o idealizador do Clube
+                  de Antenados, criado para manter pessoas maduras ativas nas
+                  novas tendências e tecnologias.
+                </p>
+                <div class="bridge__author">
+                  <div
+                    class="bridge__photo-fallback"
+                    id="instructor-photo"
+                    aria-hidden="true"
+                  >
+                    MB
+                  </div>
+                  <div class="bridge__meta">
+                    <strong>Matheus Paiva</strong>
+                    <span>Neuropsicólogo</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Outcomes -->
+      <section class="section section--surface section--outcomes" aria-labelledby="outcomes-title">
+        <div class="wrap">
+          <h2 id="outcomes-title">O que você vai conseguir fazer</h2>
+          <p class="lede">Usos práticos do dia a dia, no seu ritmo.</p>
+
+          <ul class="outcomes">
+            <li class="outcome">
+              <div class="outcome__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 5h16v10H8l-4 4V5z" />
+                  <path d="M8 9h8M8 12h5" />
+                </svg>
+              </div>
+              <div>
+                <h3>Mensagens para a família</h3>
+                <p>Escreva recados, parabéns e textos sem esforço.</p>
+              </div>
+            </li>
+            <li class="outcome">
+              <div class="outcome__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M6 4h9l3 3v13H6V4z" />
+                  <path d="M9 11h6M9 15h4" />
+                </svg>
+              </div>
+              <div>
+                <h3>Tradução de burocracias</h3>
+                <p>Entenda contratos, bulas e cartas do banco em linguagem simples.</p>
+              </div>
+            </li>
+            <li class="outcome">
+              <div class="outcome__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <ellipse cx="10" cy="13" rx="7" ry="6" />
+                  <path d="M16.5 11h3.8a1.7 1.7 0 010 3.4H16" />
+                  <path d="M5.5 10c1.4-1.6 3.2-2.3 4.5-2.3S12.1 8.4 13.5 10" />
+                </svg>
+              </div>
+              <div>
+                <h3>Receitas em segundos</h3>
+                <p>Diga o que tem na geladeira e receba pratos prontos.</p>
+              </div>
+            </li>
+            <li class="outcome">
+              <div class="outcome__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                </svg>
+              </div>
+              <div>
+                <h3>Planejamento de passeios</h3>
+                <p>Monte roteiros de viagem passo a passo.</p>
+              </div>
+            </li>
+            <li class="outcome">
+              <div class="outcome__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M9.5 5.5c-2 0-3.5 1.6-3.5 3.6 0 .9.3 1.7.9 2.3C6.2 12 6 12.8 6 13.7c0 2.1 1.7 3.8 3.8 3.8.8 0 1.5-.2 2.1-.7.6.5 1.3.7 2.1.7 2.1 0 3.8-1.7 3.8-3.8 0-.9-.2-1.7-.9-2.3.6-.6.9-1.4.9-2.3 0-2-1.5-3.6-3.5-3.6-1 0-1.9.5-2.5 1.2-.6-.7-1.5-1.2-2.5-1.2z" />
+                  <path d="M12 7v10.5M9.8 10.2c.7.4 1.4.6 2.2.6s1.5-.2 2.2-.6M9.5 13.8c.7.4 1.5.6 2.5.6s1.8-.2 2.5-.6" />
+                </svg>
+              </div>
+              <div>
+                <h3>Aprendizado contínuo</h3>
+                <p>Pergunte sobre história, curiosidades e idiomas no seu ritmo.</p>
+              </div>
+            </li>
+            <li class="outcome">
+              <div class="outcome__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="8" cy="10" r="3" />
+                  <circle cx="16" cy="10" r="3" />
+                  <path d="M2 19c1.5-3 4-4.5 6-4.5S12.5 16 14 19M10 19c1.5-3 4-4.5 6-4.5S20.5 16 22 19" />
+                </svg>
+              </div>
+              <div>
+                <h3>Conexão com os mais novos</h3>
+                <p>Entenda termos, gírias e novidades tecnológicas.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5. How it works -->
+      <section class="section how" aria-labelledby="how-title">
+        <div class="wrap">
+          <h2 id="how-title">Como funciona</h2>
+          <p class="lede">Três passos simples. Sem complicação.</p>
+
+          <div class="how-carousel" data-how-carousel>
+            <button
+              type="button"
+              class="how-carousel__nav how-carousel__nav--prev"
+              data-how-prev
+              aria-label="Passo anterior"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14.5 6L8.5 12l6 6" />
+              </svg>
+            </button>
+
+            <div class="how-carousel__viewport">
+              <ul class="how-carousel__track" data-how-track>
+                <li class="how-card is-active" data-how-card>
+                  <div class="how-card__body">
+                    <span class="how-card__num">01</span>
+                    <h3>Inscrição rápida</h3>
+                    <p>Pagamento via Pix, cartão ou boleto.</p>
+                  </div>
+                  <img
+                    class="how-card__media"
+                    src="images/how-pix.jpg"
+                    alt="Pagamento via Pix no celular"
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                  />
+                </li>
+                <li class="how-card" data-how-card>
+                  <div class="how-card__body">
+                    <span class="how-card__num">02</span>
+                    <h3>Acesso imediato</h3>
+                    <p>Pela plataforma da Hotmart (te ensino a usar).</p>
+                  </div>
+                  <img
+                    class="how-card__media"
+                    src="images/how-hotmart.jpg"
+                    alt="Acesso à Hotmart no celular"
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                  />
+                </li>
+                <li class="how-card" data-how-card>
+                  <div class="how-card__body">
+                    <span class="how-card__num">03</span>
+                    <h3>Prática desde a aula 1</h3>
+                    <p>Após a primeira aula você já estará usando Inteligência Artificial</p>
+                  </div>
+                  <img
+                    class="how-card__media"
+                    src="images/how-pratica.jpg"
+                    alt="Casal usando o celular juntos"
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                  />
+                </li>
+              </ul>
+            </div>
+
+            <button
+              type="button"
+              class="how-carousel__nav how-carousel__nav--next"
+              data-how-next
+              aria-label="Próximo passo"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9.5 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Modules -->
+      <section class="section section--modules" aria-labelledby="modules-title">
+        <div class="wrap">
+          <header class="modules__header">
+            <h2 id="modules-title">O que tem nas aulas</h2>
+            <p class="lede">Ao longo de 3 módulos curtos, você aprende:</p>
+          </header>
+
+          <div class="modules__basket">
+            <ol class="modules">
+              <li class="module">
+                <div class="module__num" aria-hidden="true">1</div>
+                <div>
+                  <h3>Sua primeira conversa com a IA</h3>
+                  <p>Veja a resposta acontecer na tela.</p>
+                </div>
+              </li>
+              <li class="module">
+                <div class="module__num" aria-hidden="true">2</div>
+                <div>
+                  <h3>Como pedir do jeito certo</h3>
+                  <p>Pergunte sem medo e refine quando precisar.</p>
+                </div>
+              </li>
+              <li class="module">
+                <div class="module__num" aria-hidden="true">3</div>
+                <div>
+                  <h3>O dia a dia prático</h3>
+                  <p>Receitas, mensagens e planejamento.</p>
+                </div>
+              </li>
+              <li class="module">
+                <div class="module__num" aria-hidden="true">4</div>
+                <div>
+                  <h3>Desvendando documentos e textos difíceis</h3>
+                  <p>Contratos, bulas e cartas — em linguagem simples.</p>
+                </div>
+              </li>
+              <li class="module">
+                <div class="module__num" aria-hidden="true">5</div>
+                <div>
+                  <h3>Explorando novos conhecimentos</h3>
+                  <p>Curiosidades, idiomas e tendências no seu ritmo.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Bonus -->
+      <section class="section section--sage section--bonus" aria-labelledby="bonus-title">
+        <div class="bonus__glow" aria-hidden="true"></div>
+        <div class="wrap">
+          <div class="bonus">
+            <p class="bonus__badge">Incluído sem custo extra</p>
+            <h2 id="bonus-title">Bônus: Módulo Anti-golpe</h2>
+            <p>
+              Aprenda a identificar os sinais mais comuns de golpes digitais
+              por mensagem, links suspeitos e ligações, blindando o seu uso
+              diário da tecnologia.
+            </p>
+            <p class="bonus__note">Navegue com mais segurança — sem pagar a mais.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. Testimonials -->
+      <section class="section" aria-labelledby="testimonials-title">
+        <div class="wrap-wide">
+          <div class="section__intro">
+            <h2 id="testimonials-title">Quem já começou</h2>
+            <p class="lede">Histórias reais de quem aprendeu no próprio ritmo.</p>
+          </div>
+
+          <div class="testimonials__rating" aria-label="Avaliação 4.8 de 5">
+            <div class="testimonials__score">
+              <div class="stars stars--4-8" aria-hidden="true">
+                <div class="stars__track">
+                  <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z"/></svg>
+                </div>
+                <div class="stars__fill">
+                  <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z"/></svg>
+                </div>
+              </div>
+              <span class="testimonials__score-num">4.8</span>
+            </div>
+            <div class="testimonials__faces" aria-hidden="true">
+              <span class="testimonials__face">
+                <img src="images/testimonial-mara.jpg" alt="" />
+              </span>
+              <span class="testimonials__face">
+                <img src="images/testimonial-joel.jpg" alt="" />
+              </span>
+              <span class="testimonials__face">
+                <img src="images/testimonial-anelise.jpg" alt="" />
+              </span>
+              <span class="testimonials__face testimonials__face--more">9+</span>
+            </div>
+          </div>
+
+          <div class="testimonials" id="testimonials"></div>
+        </div>
+      </section>
+
+      <!-- 9. Offer -->
+      <section class="section section--surface" id="oferta" aria-labelledby="offer-title">
+        <div class="wrap">
+          <p class="eyebrow">Oferta</p>
+          <h2 id="offer-title">Comece hoje, com garantia</h2>
+
+          <div class="offer-glow">
+            <div class="offer-card">
+              <div class="offer-card__meta">
+                <span>Acesso completo</span>
+                <span>Pagamento único</span>
+              </div>
+
+              <p class="offer__pack">
+                IA para Antenados Completo + Bônus Anti-golpe
+              </p>
+
+              <div class="offer__price">
+                <p class="offer__from">De <s>R$&nbsp;97</s> por</p>
+                <p class="offer__new">
+                  <span class="offer__currency">R$</span>
+                  <span class="offer__amount">47</span>
+                </p>
+              </div>
+
+              <p class="offer__save">Você economiza R$&nbsp;50</p>
+
+              <p class="offer__terms">
+                à vista no Pix · ou em até 12x no cartão
+              </p>
+
+              <a class="btn btn--cta btn--block js-checkout" href="#oferta">
+                Quero começar agora por R$&nbsp;47
+              </a>
+
+              <p class="offer__trust">
+                7 dias de garantia · Pagamento seguro Hotmart
+              </p>
+
+              <aside class="guarantee" aria-labelledby="guarantee-title">
+                <div class="guarantee__seal" aria-hidden="true">
+                  7<br />dias
+                </div>
+                <div>
+                  <h3 id="guarantee-title">7 dias para testar, sem risco</h3>
+                  <p>
+                    Assista às aulas, use a inteligência artificial e veja se é
+                    para você. Se em 7 dias achar que não valeu a pena, é só pedir
+                    e devolvemos todo o valor.
+                  </p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. FAQ -->
+      <section class="section" id="faq" aria-labelledby="faq-title">
+        <div class="wrap">
+          <h2 id="faq-title">Perguntas frequentes</h2>
+          <div class="faq">
+            <details class="faq__item" open>
+              <summary class="faq__q">É golpe?</summary>
+              <div class="faq__a">
+                <p>
+                  É bom desconfiar, e eu entendo a pergunta. O pagamento é feito
+                  em uma plataforma de pagamentos segura, a Hotmart. Você tem 7
+                  dias de garantia e pode falar comigo pelo WhatsApp antes de
+                  comprar:
+                  <a
+                    id="faq-wa-1"
+                    href="https://wa.me/5535997160702"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >(35) 99716-0702</a
+                  >. O curso ainda inclui um módulo para você aprender a
+                  reconhecer golpes.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary class="faq__q">Preciso saber mexer no computador?</summary>
+              <div class="faq__a">
+                <p>
+                  Não. Você aprende do começo, uma etapa de cada vez. Se você já
+                  manda mensagem pelo WhatsApp, já tem a base para começar.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary class="faq__q">Funciona no celular?</summary>
+              <div class="faq__a">
+                <p>
+                  Sim. As aulas foram feitas especificamente para o celular, mas
+                  você pode fazer no tablet e no computador também.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary class="faq__q">E se eu não entender?</summary>
+              <div class="faq__a">
+                <p>
+                  As aulas são curtas e você pode rever quantas vezes quiser. Se
+                  ainda assim travar, fale com a gente pelo WhatsApp:
+                  <a
+                    id="faq-wa-2"
+                    href="https://wa.me/5535997160702"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >(35) 99716-0702</a
+                  >.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary class="faq__q">Como eu pago?</summary>
+              <div class="faq__a">
+                <p>
+                  Por Pix, cartão de crédito em até 12x ou boleto. Pagando por
+                  Pix, o acesso é liberado em poucos minutos. No boleto, o
+                  acesso é liberado após a compensação do pagamento.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary class="faq__q">
+                Preciso pagar por alguma ferramenta de IA?
+              </summary>
+              <div class="faq__a">
+                <p>
+                  Não. Usaremos ferramentas totalmente gratuitas. Você pode
+                  pagar planos mais avançados para ter acesso a funcionalidades
+                  mais avançadas. Mas é completamente possível fazer sem pagar
+                  nada.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. Final CTA -->
+      <section class="section close" aria-labelledby="close-title">
+        <div class="wrap">
+          <figure class="close__photo">
+            <img
+              src="images/regina.jpg"
+              alt="Regina, mãe do Matheus"
+              width="320"
+              height="320"
+            />
+          </figure>
+          <h2 id="close-title">Minha mãe começou com uma pergunta</h2>
+          <p class="lede">
+            Hoje ela resolve tudo sozinha e ainda me ensina. Você viu a TV
+            ficar colorida e o telefone perder o fio. Aprender a usar a
+            inteligência artificial é o próximo passo, e cabe em aulas de
+            poucos minutos.
+          </p>
+          <div class="close__panel">
+            <div class="close__price">
+              <p class="close__from">De <s>R$&nbsp;97</s> por</p>
+              <p class="close__new">
+                <span class="close__currency">R$</span>
+                <span class="close__amount">47</span>
+              </p>
+            </div>
+            <a class="btn btn--cta btn--block js-checkout" href="#oferta">
+              Quero começar agora
+            </a>
+          </div>
+          <div class="close__wa">
+            <p class="muted">Ficou com alguma dúvida?</p>
+            <a
+              class="btn btn--whatsapp btn--block"
+              id="close-whatsapp"
+              href="https://wa.me/5535997160702"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Fale comigo no WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 12. Footer -->
+    <footer class="footer">
+      <div class="wrap">
+        <a class="footer__brand" href="#topo">
+          <img
+            src="assets/brand/clube-de-antenados.png"
+            alt="Clube de Antenados"
+            width="180"
+            height="64"
+          />
+        </a>
+        <p>M Menegucci de Paiva · 49.082.582/0001-91</p>
+        <p>
+          Contato:
+          <a href="mailto:matheuspaiva.video@gmail.com"
+            >matheuspaiva.video@gmail.com</a
+          >
+        </p>
+        <div class="footer__links">
+          <a href="privacidade.html">Política de privacidade</a>
+          <a href="termos.html">Termos de uso</a>
+        </div>
+        <p class="footer__legal">
+          A inteligência artificial ajuda a entender e a escrever, mas não
+          substitui médico, advogado ou outro profissional. O Clube de
+          Antenados não é afiliado a nenhuma empresa de inteligência artificial.
+          Este site não faz parte do Facebook nem da Meta e não é endossado por
+          eles. Facebook é uma marca da Meta Platforms, Inc.
+        </p>
+      </div>
+    </footer>
+
+    <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+      <a class="btn btn--cta js-checkout" href="#oferta">Quero começar</a>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
