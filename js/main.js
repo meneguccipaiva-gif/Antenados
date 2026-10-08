@@ -53,15 +53,48 @@
 
     if (embedUrl) {
       vsl.innerHTML = "";
+      const url = new URL(embedUrl);
+      url.searchParams.set("autoplay", "1");
+      url.searchParams.set("mute", "1");
+      url.searchParams.set("playsinline", "1");
+      url.searchParams.set("enablejsapi", "1");
+      url.searchParams.set("rel", "0");
+      url.searchParams.set("origin", window.location.origin);
+
       const iframe = document.createElement("iframe");
-      iframe.src = embedUrl.includes("?")
-        ? embedUrl + "&autoplay=1"
-        : embedUrl + "?autoplay=1";
+      iframe.src = url.toString();
       iframe.title = "Vídeo: IA para Antenados";
       iframe.allow =
         "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
       iframe.allowFullscreen = true;
+
+      function sendCommand(func) {
+        if (!iframe.contentWindow) return;
+        iframe.contentWindow.postMessage(
+          JSON.stringify({ event: "command", func: func, args: [] }),
+          "*"
+        );
+      }
+
+      iframe.addEventListener("load", function () {
+        sendCommand("playVideo");
+        window.setTimeout(function () {
+          sendCommand("playVideo");
+        }, 400);
+      });
+
+      const sound = document.createElement("button");
+      sound.type = "button";
+      sound.className = "vsl-sound";
+      sound.textContent = "Ativar som";
+      sound.addEventListener("click", function () {
+        sendCommand("unMute");
+        sendCommand("playVideo");
+        sound.remove();
+      });
+
       vsl.appendChild(iframe);
+      vsl.appendChild(sound);
       return;
     }
 

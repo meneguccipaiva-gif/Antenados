@@ -517,6 +517,24 @@ h3 {
   fill: #fff;
 }
 
+.vsl-sound {
+  position: absolute;
+  top: 0.65rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  min-height: 44px;
+  padding: 0.55rem 1.1rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;
