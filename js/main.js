@@ -43,84 +43,20 @@
   }
 
   // VSL
-  const vsl = document.getElementById("vsl");
+  const vslPlayer = document.getElementById("vsl-player");
   const vslPlay = document.getElementById("vsl-play");
-  const vslFallback = document.getElementById("vsl-fallback");
 
-  function playVsl() {
-    if (!vsl) return;
-    const embedUrl = cfg.vsl && cfg.vsl.embedUrl;
-
-    if (embedUrl) {
-      vsl.innerHTML = "";
-      const url = new URL(embedUrl);
-      url.searchParams.set("autoplay", "1");
-      url.searchParams.set("mute", "1");
-      url.searchParams.set("playsinline", "1");
-      url.searchParams.set("enablejsapi", "1");
-      url.searchParams.set("rel", "0");
-      url.searchParams.set("origin", window.location.origin);
-
-      const iframe = document.createElement("iframe");
-      iframe.src = url.toString();
-      iframe.title = "Vídeo: IA para Antenados";
-      iframe.allow =
-        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-      iframe.allowFullscreen = true;
-
-      function sendCommand(func) {
-        if (!iframe.contentWindow) return;
-        iframe.contentWindow.postMessage(
-          JSON.stringify({ event: "command", func: func, args: [] }),
-          "*"
-        );
-      }
-
-      iframe.addEventListener("load", function () {
-        sendCommand("playVideo");
-        window.setTimeout(function () {
-          sendCommand("playVideo");
-        }, 400);
-      });
-
-      const sound = document.createElement("button");
-      sound.type = "button";
-      sound.className = "vsl-sound";
-      sound.textContent = "Ativar som";
-      sound.addEventListener("click", function () {
-        sendCommand("unMute");
-        sendCommand("playVideo");
-        sound.remove();
-      });
-
-      vsl.appendChild(iframe);
-      vsl.appendChild(sound);
-      return;
-    }
-
-    // Placeholder: calm message when no video is configured yet
-    if (vslPlay) {
-      const label = vslPlay.querySelector(".vsl-play__btn");
-      if (label) {
-        const icon = label.querySelector(".vsl-play__icon");
-        label.textContent = "";
-        if (icon) label.appendChild(icon);
-        label.appendChild(document.createTextNode("Vídeo em breve"));
-      }
-      vslPlay.disabled = true;
-    }
+  if (vslPlayer && cfg.vsl) {
+    if (cfg.vsl.videoSrc) vslPlayer.src = cfg.vsl.videoSrc;
+    if (cfg.vsl.posterSrc) vslPlayer.poster = cfg.vsl.posterSrc;
   }
 
-  if (cfg.vsl && cfg.vsl.posterSrc && vslFallback) {
-    const poster = document.createElement("img");
-    poster.src = cfg.vsl.posterSrc;
-    poster.alt = "";
-    poster.className = "hero__poster";
-    vslFallback.replaceWith(poster);
-  }
-
-  if (vslPlay) {
-    vslPlay.addEventListener("click", playVsl);
+  if (vslPlay && vslPlayer) {
+    vslPlay.addEventListener("click", function () {
+      vslPlayer.controls = true;
+      vslPlayer.play();
+      vslPlay.remove();
+    });
   }
 
   // Testimonials (simple message cards)

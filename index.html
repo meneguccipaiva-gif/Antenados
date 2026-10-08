@@ -66,7 +66,12 @@
             </div>
 
             <div class="hero__media" id="vsl">
-              <div class="hero__poster-fallback" id="vsl-fallback" aria-hidden="true"></div>
+              <video
+                id="vsl-player"
+                class="hero__video"
+                playsinline
+                preload="metadata"
+              ></video>
               <button type="button" class="vsl-play" id="vsl-play" aria-label="Toque para assistir o vídeo">
                 <span class="vsl-play__btn">
                   <span class="vsl-play__icon" aria-hidden="true">

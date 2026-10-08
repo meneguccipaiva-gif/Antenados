@@ -6,9 +6,8 @@ window.ANTENADOS = {
   whatsappUrl: "https://wa.me/5535997160702",
   whatsappDisplay: "(35) 99716-0702",
   vsl: {
-    // Paste YouTube/Vimeo embed URL or leave empty for placeholder
-    embedUrl: "https://www.youtube.com/embed/RpRAzYp0y1k",
-    posterSrc: "https://i.ytimg.com/vi/RpRAzYp0y1k/hqdefault.jpg",
+    videoSrc: "videos/vsl.mp4",
+    posterSrc: "images/vsl-poster.jpg",
   },
   instructorPhoto: "images/matheus-paiva.jpg",
   testimonials: [

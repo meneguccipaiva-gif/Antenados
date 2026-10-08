@@ -358,9 +358,8 @@ h3 {
 
 .hero__media {
   position: relative;
-  width: auto;
-  max-width: min(100% - 2rem, 285px);
-  height: min(46vh, 380px);
+  width: min(100% - 2rem, 285px);
+  height: auto;
   margin: 0 auto 1.2rem;
   aspect-ratio: 3 / 4;
   background: #0b1f4a;
@@ -453,6 +452,7 @@ h3 {
   border: 0;
   display: block;
   object-fit: cover;
+  background: #0b1f4a;
 }
 
 .hero__poster {
@@ -472,6 +472,7 @@ h3 {
 .vsl-play {
   position: absolute;
   inset: 0;
+  z-index: 2;
   display: grid;
   place-items: center;
   background: rgba(11, 31, 74, 0.28);
@@ -517,23 +518,6 @@ h3 {
   fill: #fff;
 }
 
-.vsl-sound {
-  position: absolute;
-  top: 0.65rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  min-height: 44px;
-  padding: 0.55rem 1.1rem;
-  border: 0;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.96);
-  color: var(--ink);
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  box-shadow: var(--shadow-soft);
-}
 
 @keyframes fadeUp {
   from {
@@ -1895,8 +1879,7 @@ h3 {
   }
 
   .hero__media {
-    height: min(52vh, 420px);
-    max-width: 320px;
+    width: min(100% - 2rem, 320px);
     margin-bottom: 1.5rem;
   }
 
@@ -2007,9 +1990,7 @@ h3 {
   .hero__media {
     grid-area: media;
     margin: 0;
-    max-width: 340px;
-    width: 100%;
-    height: min(58vh, 460px);
+    width: min(100%, 340px);
   }
 
   .hero__actions {
