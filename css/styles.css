@@ -356,11 +356,18 @@ h3 {
   animation: fadeUp 0.7s ease 0.16s forwards;
 }
 
+.hero__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .hero__media {
   position: relative;
   width: min(100% - 2rem, 285px);
   height: auto;
-  margin: 0 auto 1.2rem;
+  margin: 0 auto 0.5rem;
   aspect-ratio: 3 / 4;
   background: #0b1f4a;
   border-radius: 22px;
@@ -443,6 +450,41 @@ h3 {
   fill: none;
   stroke-width: 2;
   flex-shrink: 0;
+}
+
+.hero__scroll {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  gap: 0.15rem;
+  margin: 0.15rem 0 1.1rem;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.hero__scroll svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: heroScrollHint 1.6s ease-in-out infinite;
+}
+
+@keyframes heroScrollHint {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
 }
 
 .hero__media iframe,
@@ -533,7 +575,7 @@ h3 {
 /* Hero pin — sticky stage under story overlay */
 .hero-pin {
   position: relative;
-  height: calc(200vh + 3vh); /* folga antes da story cruzar a dobra */
+  height: calc(200vh + 8vh); /* folga antes da story cruzar a dobra */
 }
 
 .hero-pin__sticky {
@@ -1880,7 +1922,7 @@ h3 {
 
   .hero__media {
     width: min(100% - 2rem, 320px);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.55rem;
   }
 
   .hero__actions {
@@ -1987,9 +2029,16 @@ h3 {
     font-size: 1.25rem;
   }
 
-  .hero__media {
+  .hero__stage {
     grid-area: media;
-    margin: 0;
+    width: auto;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .hero__media {
+    grid-area: auto;
+    margin: 0 0 0.55rem;
     width: min(100%, 340px);
   }
 
@@ -2003,6 +2052,11 @@ h3 {
 
   .hero__trust {
     justify-content: flex-start;
+  }
+
+  .hero__scroll {
+    align-self: center;
+    margin-bottom: 0;
   }
 
   .hero__chip {
@@ -2226,9 +2280,14 @@ h3 {
   .hero__lede,
   .hero__media,
   .hero__actions,
-  .hero__trust {
+  .hero__trust,
+  .hero__scroll {
     animation: none;
     opacity: 1;
+  }
+
+  .hero__scroll svg {
+    animation: none;
   }
 
   .outcome,

@@ -141,6 +141,20 @@
     sticky.classList.toggle("is-visible", pastHero && !offerVisible);
     sticky.classList.toggle("is-hidden-offer", offerVisible);
     sticky.setAttribute("aria-hidden", pastHero && !offerVisible ? "false" : "true");
+
+    const stickyLink = sticky.querySelector("a");
+    if (stickyLink) {
+      const offerPassed = offerRect.top < 0 && !offerVisible;
+      if (offerPassed && !isPlaceholderCheckout(checkoutUrl)) {
+        stickyLink.setAttribute("href", checkoutUrl);
+        stickyLink.setAttribute("target", "_blank");
+        stickyLink.setAttribute("rel", "noopener noreferrer");
+      } else {
+        stickyLink.setAttribute("href", "#oferta");
+        stickyLink.removeAttribute("target");
+        stickyLink.removeAttribute("rel");
+      }
+    }
   }
 
   window.addEventListener("scroll", updateSticky, { passive: true });
@@ -273,10 +287,10 @@
       const count = panels.length;
       const total = Math.max(section.offsetHeight, 1);
 
-      // Pre-lift (~3vh) before story enters, then cover: story invades; hero rises 30%
+      // Pre-lift (~8vh) before story enters, then cover: story invades; hero rises 30%
       const coverProgress = clamp((vh - storyTop) / vh, 0, 1);
       if (heroSticky) {
-        const LIFT = 0.03 * vh;
+        const LIFT = 0.08 * vh;
         const preLift = clamp(vh + LIFT - storyTop, 0, LIFT);
         const coverY = 0.3 * vh * coverProgress;
         heroSticky.style.transform =
