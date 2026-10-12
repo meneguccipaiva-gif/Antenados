@@ -52,7 +52,33 @@
   }
 
   if (vslPlay && vslPlayer) {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const TEASER_S = 5;
+
+    function loopTeaser() {
+      if (vslPlayer.currentTime >= TEASER_S) {
+        vslPlayer.currentTime = 0;
+      }
+    }
+
+    if (!reduceMotion) {
+      vslPlayer.muted = true;
+      vslPlayer.playsInline = true;
+      vslPlayer.autoplay = true;
+      vslPlayer.addEventListener("timeupdate", loopTeaser);
+      const teaserPlay = vslPlayer.play();
+      if (teaserPlay && typeof teaserPlay.catch === "function") {
+        teaserPlay.catch(function () {});
+      }
+    }
+
     vslPlay.addEventListener("click", function () {
+      vslPlayer.removeEventListener("timeupdate", loopTeaser);
+      vslPlayer.pause();
+      vslPlayer.currentTime = 0;
+      vslPlayer.muted = false;
       vslPlayer.controls = true;
       vslPlayer.play();
       vslPlay.remove();
@@ -123,7 +149,7 @@
   // Sticky CTA
   const sticky = document.getElementById("sticky-cta");
   const offer = document.getElementById("oferta");
-  const storySection = document.querySelector(".story-scroll");
+  const outcomes = document.getElementById("outcomes-title");
 
   function updateSticky() {
     if (!sticky || !offer) return;
@@ -133,27 +159,23 @@
     const offerVisible =
       offerRect.top < vh * 0.85 && offerRect.bottom > 80;
 
-    const storyTop = storySection
-      ? storySection.getBoundingClientRect().top
+    const outcomesTop = outcomes
+      ? outcomes.getBoundingClientRect().top
       : vh;
-    const pastHero = storyTop < vh * 0.55;
+    const pastOutcomes = outcomesTop < vh * 0.85;
 
-    sticky.classList.toggle("is-visible", pastHero && !offerVisible);
+    sticky.classList.toggle("is-visible", pastOutcomes && !offerVisible);
     sticky.classList.toggle("is-hidden-offer", offerVisible);
-    sticky.setAttribute("aria-hidden", pastHero && !offerVisible ? "false" : "true");
+    sticky.setAttribute(
+      "aria-hidden",
+      pastOutcomes && !offerVisible ? "false" : "true"
+    );
 
     const stickyLink = sticky.querySelector("a");
     if (stickyLink) {
-      const offerPassed = offerRect.top < 0 && !offerVisible;
-      if (offerPassed && !isPlaceholderCheckout(checkoutUrl)) {
-        stickyLink.setAttribute("href", checkoutUrl);
-        stickyLink.setAttribute("target", "_blank");
-        stickyLink.setAttribute("rel", "noopener noreferrer");
-      } else {
-        stickyLink.setAttribute("href", "#oferta");
-        stickyLink.removeAttribute("target");
-        stickyLink.removeAttribute("rel");
-      }
+      stickyLink.setAttribute("href", "#oferta");
+      stickyLink.removeAttribute("target");
+      stickyLink.removeAttribute("rel");
     }
   }
 
@@ -287,15 +309,7 @@
       const count = panels.length;
       const total = Math.max(section.offsetHeight, 1);
 
-      // Pre-lift (~8vh) before story enters, then cover: story invades; hero rises 30%
-      const coverProgress = clamp((vh - storyTop) / vh, 0, 1);
-      if (heroSticky) {
-        const LIFT = 0.08 * vh;
-        const preLift = clamp(vh + LIFT - storyTop, 0, LIFT);
-        const coverY = 0.3 * vh * coverProgress;
-        heroSticky.style.transform =
-          "translateY(" + -(preLift + coverY) + "px)";
-      }
+      if (heroSticky) heroSticky.style.transform = "";
 
       if (storyTop >= vh || storyTop <= -total) {
         for (let i = 0; i < count; i++) applyCard(i, -1, cardStyle);
@@ -369,68 +383,12 @@
 
   // Hero: layered parallax on story cover progress
   function initHeroParallax() {
-    const story = document.querySelector(".story-scroll");
     const copy = document.querySelector(".hero__copy");
     const media = document.querySelector(".hero__media");
     const actions = document.querySelector(".hero__actions");
-    if (!story || (!copy && !media && !actions)) return;
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    function clamp(n, min, max) {
-      return Math.min(max, Math.max(min, n));
-    }
-
-    function clearTransforms() {
-      if (copy) copy.style.transform = "";
-      if (media) media.style.transform = "";
-      if (actions) actions.style.transform = "";
-    }
-
-    if (reduceMotion.matches) {
-      clearTransforms();
-      return;
-    }
-
-    let ticking = false;
-
-    function update() {
-      ticking = false;
-      const vh = window.innerHeight || 1;
-      const storyTop = story.getBoundingClientRect().top;
-      const progress = clamp((vh - storyTop) / vh, 0, 1);
-
-      if (copy) {
-        copy.style.transform = "translate3d(0, " + -18 * progress + "px, 0)";
-      }
-      if (media) {
-        media.style.transform = "translate3d(0, " + -28 * progress + "px, 0)";
-      }
-      if (actions) {
-        actions.style.transform = "translate3d(0, " + -12 * progress + "px, 0)";
-      }
-    }
-
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(update);
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-
-    if (typeof reduceMotion.addEventListener === "function") {
-      reduceMotion.addEventListener("change", () => {
-        if (reduceMotion.matches) {
-          clearTransforms();
-          window.removeEventListener("scroll", onScroll);
-          window.removeEventListener("resize", onScroll);
-        }
-      });
-    }
-
-    update();
+    if (copy) copy.style.transform = "";
+    if (media) media.style.transform = "";
+    if (actions) actions.style.transform = "";
   }
 
   initHeroParallax();
