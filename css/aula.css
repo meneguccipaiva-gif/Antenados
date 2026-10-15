@@ -1,0 +1,273 @@
+/* Aula gratuita — o player é o primeiro viewport */
+
+.aula-stage {
+  --aula-h: calc(100dvh - var(--nav-h) - env(safe-area-inset-bottom, 0px));
+  display: flex;
+  justify-content: center;
+  background: #fff;
+}
+
+.aula-frame {
+  position: relative;
+  width: min(100%, calc(var(--aula-h) * 9 / 16));
+  aspect-ratio: 9 / 16;
+  max-height: var(--aula-h);
+  background: #0b1f4a;
+  overflow: hidden;
+}
+
+.aula-frame iframe,
+#aula-player {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  z-index: 1;
+}
+
+.aula-poster,
+.aula-form,
+.aula-cue,
+.aula-missing {
+  position: absolute;
+  z-index: 3;
+}
+
+.aula-poster[hidden],
+.aula-form[hidden],
+.aula-cue[hidden],
+.aula-missing[hidden] {
+  display: none !important;
+}
+
+.aula-poster {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.35rem 1.15rem 1.6rem;
+  background:
+    linear-gradient(180deg, rgba(11, 31, 74, 0.55) 0%, rgba(11, 31, 74, 0.08) 42%, rgba(11, 31, 74, 0.72) 100%),
+    linear-gradient(165deg, #0259dd 0%, #12356f 48%, #0b1f4a 100%);
+  color: #fff;
+}
+
+.aula-poster__kicker {
+  margin: 0 0 0.65rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.aula-poster h1 {
+  margin: 0 0 0.55rem;
+  color: #fff;
+  font-size: clamp(1.85rem, 6.4vw, 2.55rem);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.aula-poster__lede {
+  margin: 0;
+  max-width: 22ch;
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.aula-play {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 56px;
+  margin-bottom: 8%;
+  padding: 0.85rem 1.35rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+}
+
+.aula-play:hover {
+  transform: scale(1.03);
+}
+
+.aula-play__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cta);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.aula-play__icon svg {
+  width: 12px;
+  height: 12px;
+  margin-left: 2px;
+  fill: #fff;
+}
+
+.aula-form {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.7rem;
+  padding: 1.15rem 1rem 1.2rem;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 31, 74, 0.05) 0%,
+    rgba(11, 31, 74, 0.78) 38%,
+    rgba(11, 31, 74, 0.94) 100%
+  );
+  color: #fff;
+  overflow: auto;
+}
+
+.aula-form h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.55rem, 5vw, 2rem);
+}
+
+.aula-form__lede {
+  margin: 0 0 0.25rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.aula-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+.aula-field input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0.75rem 0.9rem;
+  border: 0;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+}
+
+.aula-field input:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.aula-form__error {
+  margin: 0;
+  font-weight: 700;
+  color: #ffe1d7;
+}
+
+.aula-form__note {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.aula-form__note a {
+  color: #fff;
+}
+
+.aula-form .btn[disabled] {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.aula-cue .btn[disabled] {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.aula-cue {
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--shadow-soft);
+}
+
+.aula-cue.is-hot {
+  animation: aula-pop 0.45s ease;
+}
+
+.aula-cue__dismiss {
+  border: 0;
+  background: transparent;
+  color: var(--ink-muted);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 44px;
+  padding: 0.2rem 0.8rem;
+}
+
+.aula-missing {
+  inset: auto 1rem 1.5rem;
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+}
+
+.aula-offer {
+  padding: 2.25rem 0 3rem;
+}
+
+.aula-offer.is-hot .btn--cta {
+  animation: aula-pop 0.45s ease;
+}
+
+@keyframes aula-pop {
+  from {
+    transform: scale(0.98);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (min-width: 768px) {
+  .aula-frame {
+    border-radius: 22px;
+    box-shadow:
+      0 0 0 1px rgba(132, 175, 251, 0.45),
+      0 18px 48px rgba(11, 31, 74, 0.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aula-cue.is-hot,
+  .aula-offer.is-hot .btn--cta,
+  .aula-play:hover {
+    animation: none;
+    transform: none;
+  }
+}

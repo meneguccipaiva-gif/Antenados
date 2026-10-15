@@ -10,6 +10,15 @@ window.ANTENADOS = {
     posterSrc: "images/vsl-poster.jpg",
   },
   instructorPhoto: "images/matheus-paiva.jpg",
+  aula: {
+    introVideoId: "6VkzQVNDeX0",
+    lessonVideoId: "_RDDF9B3dfA",
+    // Preencher depois do corte, em segundos.
+    // action "intent" grava o clique e fica na página.
+    // action "checkout" grava e abre a Hotmart. O último momento deve ser checkout.
+    // Exemplo: { at: 480, id: "uso", action: "intent" }
+    cues: [],
+  },
   testimonials: [
     {
       name: "Mara",

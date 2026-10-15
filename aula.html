@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Aula gratuita de 30 minutos. Restaure fotos antigas pelo WhatsApp, no celular."
+    />
+    <title>Aula gratuita — Restaure fotos antigas pelo WhatsApp</title>
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1281903030728284');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1281903030728284&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "yx2jdmxl7h");
+    </script>
+    <!-- End Microsoft Clarity -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/aula.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="wrap-wide nav__inner">
+        <a class="nav__brand" href="index.html">IA para Antenados</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="aula-stage">
+        <div class="aula-frame" id="aula-frame">
+          <div id="aula-player"></div>
+
+          <div class="aula-poster" id="aula-poster">
+            <div class="aula-poster__copy">
+              <p class="aula-poster__kicker">Aula gratuita · IA para Antenados</p>
+              <h1 id="aula-title">Restaure fotos antigas pelo WhatsApp.</h1>
+              <p class="aula-poster__lede">
+                Aula gratuita de 30 minutos. No seu celular.
+              </p>
+            </div>
+            <button type="button" class="aula-play" id="aula-play">
+              <span class="aula-play__icon" aria-hidden="true">
+                <svg viewBox="0 0 12 12">
+                  <polygon points="2,1 11,6 2,11" />
+                </svg>
+              </span>
+              <span id="aula-play-label">Toque para assistir</span>
+            </button>
+          </div>
+
+          <form class="aula-form" id="aula-form" hidden>
+            <h2>Continue a aula</h2>
+            <p class="aula-form__lede">
+              Deixe seu nome e WhatsApp para assistir o restante.
+            </p>
+            <label class="aula-field">
+              <span>Nome</span>
+              <input
+                id="aula-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                maxlength="80"
+                required
+              />
+            </label>
+            <label class="aula-field">
+              <span>WhatsApp</span>
+              <input
+                id="aula-whatsapp"
+                name="whatsapp"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel"
+                maxlength="20"
+                placeholder="(35) 99716-0702"
+                required
+              />
+            </label>
+            <p class="aula-form__error" id="aula-form-error" role="alert" hidden></p>
+            <button class="btn btn--cta btn--block" id="aula-submit" type="submit">
+              Continuar a aula
+            </button>
+            <p class="aula-form__note">
+              Usamos seu WhatsApp para liberar a aula e falar sobre o curso.
+              <a href="privacidade.html">Política de privacidade</a>
+            </p>
+          </form>
+
+          <div class="aula-cue" id="aula-cue" hidden>
+            <button type="button" class="btn btn--cta btn--block" id="aula-cue-btn">
+              Quero o IA para Antenados
+            </button>
+            <button type="button" class="aula-cue__dismiss" id="aula-cue-dismiss">
+              Agora não
+            </button>
+          </div>
+
+          <p class="aula-missing" id="aula-missing" hidden>
+            A aula entra aqui assim que o vídeo estiver no ar.
+          </p>
+        </div>
+      </div>
+
+      <section class="aula-offer" id="oferta" aria-labelledby="offer-title">
+        <div class="wrap">
+          <p class="eyebrow">Oferta</p>
+          <h2 id="offer-title">Comece hoje, com garantia</h2>
+
+          <div class="offer-glow">
+            <div class="offer-card">
+              <div class="offer-card__meta">
+                <span>Acesso completo</span>
+                <span>Pagamento único</span>
+              </div>
+
+              <p class="offer__pack">
+                IA para Antenados completo + bônus anti-golpe
+              </p>
+
+              <div class="offer__price">
+                <p class="offer__from">De <s>R$&nbsp;97</s> por</p>
+                <p class="offer__new">
+                  <span class="offer__currency">R$</span>
+                  <span class="offer__amount">47</span>
+                </p>
+              </div>
+
+              <p class="offer__save">Você economiza R$&nbsp;50</p>
+
+              <p class="offer__terms">à vista no Pix · ou em até 12x no cartão</p>
+
+              <a class="btn btn--cta btn--block" id="aula-checkout" href="#oferta">
+                Quero começar agora por R$&nbsp;47
+              </a>
+
+              <p class="offer__trust">7 dias de garantia · Pagamento seguro Hotmart</p>
+
+              <aside class="guarantee" aria-labelledby="guarantee-title">
+                <div class="guarantee__seal" aria-hidden="true">
+                  7<br />dias
+                </div>
+                <div>
+                  <h3 id="guarantee-title">7 dias para testar, sem risco</h3>
+                  <p>
+                    Se em 7 dias achar que não valeu a pena, é só pedir e
+                    devolvemos todo o valor.
+                  </p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <p>M Menegucci de Paiva · 49.082.582/0001-91</p>
+        <div class="footer__links">
+          <a href="privacidade.html">Política de privacidade</a>
+          <a href="termos.html">Termos de uso</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/aula.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+  </body>
+</html>
