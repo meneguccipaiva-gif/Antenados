@@ -20,9 +20,8 @@
   const formError = document.getElementById("aula-form-error");
   const submitBtn = document.getElementById("aula-submit");
   const controls = document.getElementById("aula-controls");
+  const reveal = document.getElementById("aula-reveal");
   const pauseBtn = document.getElementById("aula-pause");
-  const backBtn = document.getElementById("aula-back");
-  const forwardBtn = document.getElementById("aula-forward");
   const scrub = document.getElementById("aula-scrub");
   const cueBar = document.getElementById("aula-cue");
   const cueBtn = document.getElementById("aula-cue-btn");
@@ -48,6 +47,7 @@
   let lessonStarted = false;
   let capture = null;
   let scrubbing = false;
+  let controlsTimer = null;
   let activeCue = null;
   const milestonesSent = new Set();
   const seenCues = new Set(loadSeenCues());
@@ -76,15 +76,30 @@
   };
 
   playBtn.addEventListener("click", onPlay);
-  pauseBtn.addEventListener("click", togglePlay);
-  backBtn.addEventListener("click", function () { seekBy(-10); });
-  forwardBtn.addEventListener("click", function () { seekBy(10); });
+  pauseBtn.addEventListener("click", function () {
+    togglePlay();
+    bumpControls();
+  });
+  reveal.addEventListener("click", bumpControls);
+  controls.addEventListener("pointerdown", function () {
+    showControls();
+    stopControlsTimer();
+  });
   scrub.addEventListener("pointerdown", function () { scrubbing = true; });
-  scrub.addEventListener("pointerup", function () { scrubbing = false; });
+  scrub.addEventListener("pointerup", function () {
+    scrubbing = false;
+    bumpControls();
+  });
+  window.addEventListener("pointerup", function () {
+    if (!scrubbing) return;
+    scrubbing = false;
+    bumpControls();
+  });
   scrub.addEventListener("input", onScrub);
   scrub.addEventListener("change", function () {
     scrubbing = false;
     onScrub();
+    bumpControls();
   });
   form.addEventListener("submit", onSubmit);
   cueBtn.addEventListener("click", onCueClick);
@@ -185,6 +200,7 @@
     stopCover();
     poster.classList.add("is-continue");
     poster.hidden = false;
+    syncLessonBar();
   }
 
   function mount(kind) {
@@ -306,23 +322,66 @@
     if (Date.now() - progressSentAt >= 15000) sendProgress();
   }
 
+  function lessonOpen() {
+    return mode === "lesson" && poster.hidden && form.hidden && missing.hidden;
+  }
+
   function syncLessonBar() {
-    controls.hidden = mode !== "lesson";
     pauseBtn.textContent = playing ? "Pausar" : "Continuar";
+    if (!lessonOpen()) {
+      reveal.hidden = true;
+      controls.hidden = true;
+      controls.classList.remove("is-idle");
+      frame.classList.remove("is-controls");
+      stopControlsTimer();
+      return;
+    }
+    reveal.hidden = false;
+    if (!playing || scrubbing) {
+      showControls();
+      stopControlsTimer();
+      return;
+    }
+    if (controls.hidden || controls.classList.contains("is-idle")) showControls();
+    armControlsTimer();
+  }
+
+  function bumpControls() {
+    if (!lessonOpen()) return;
+    showControls();
+    if (playing && !scrubbing) armControlsTimer();
+    else stopControlsTimer();
+  }
+
+  function showControls() {
+    controls.hidden = false;
+    controls.classList.remove("is-idle");
+    frame.classList.add("is-controls");
+  }
+
+  function idleControls() {
+    controlsTimer = null;
+    if (!playing || scrubbing || !lessonOpen()) return;
+    controls.classList.add("is-idle");
+    frame.classList.remove("is-controls");
+  }
+
+  function armControlsTimer() {
+    stopControlsTimer();
+    if (!playing || scrubbing) return;
+    controlsTimer = window.setTimeout(idleControls, 3000);
+  }
+
+  function stopControlsTimer() {
+    if (!controlsTimer) return;
+    window.clearTimeout(controlsTimer);
+    controlsTimer = null;
   }
 
   function togglePlay() {
     if (!player) return;
     if (playing && typeof player.pauseVideo === "function") player.pauseVideo();
     else if (typeof player.playVideo === "function") player.playVideo();
-  }
-
-  function seekBy(delta) {
-    const length = safeDuration() || duration;
-    let next = safeTime() + delta;
-    if (next < 0) next = 0;
-    if (length && next > length) next = length;
-    seekToTime(next);
   }
 
   function seekToTime(seconds) {
