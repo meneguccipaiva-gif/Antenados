@@ -11,6 +11,7 @@
 
   const frame = document.getElementById("aula-frame");
   const poster = document.getElementById("aula-poster");
+  const cover = document.getElementById("aula-cover");
   const playBtn = document.getElementById("aula-play");
   const playLabel = document.getElementById("aula-play-label");
   const form = document.getElementById("aula-form");
@@ -18,6 +19,11 @@
   const whatsInput = document.getElementById("aula-whatsapp");
   const formError = document.getElementById("aula-form-error");
   const submitBtn = document.getElementById("aula-submit");
+  const controls = document.getElementById("aula-controls");
+  const pauseBtn = document.getElementById("aula-pause");
+  const backBtn = document.getElementById("aula-back");
+  const forwardBtn = document.getElementById("aula-forward");
+  const scrub = document.getElementById("aula-scrub");
   const cueBar = document.getElementById("aula-cue");
   const cueBtn = document.getElementById("aula-cue-btn");
   const cueDismiss = document.getElementById("aula-cue-dismiss");
@@ -40,6 +46,8 @@
   let progressSentAt = 0;
   let introStarted = false;
   let lessonStarted = false;
+  let capture = null;
+  let scrubbing = false;
   let activeCue = null;
   const milestonesSent = new Set();
   const seenCues = new Set(loadSeenCues());
@@ -48,19 +56,36 @@
     checkout.setAttribute("href", checkoutUrl);
   }
 
+  if (cover && aula.coverSrc) cover.src = aula.coverSrc;
+  playCover();
+
   if (mode === "lesson") {
     playLabel.textContent = "Continuar a aula";
     loadWatch();
+    syncLessonBar();
   }
 
   window.onYouTubeIframeAPIReady = function () {
     apiReady = true;
+    if (mode === "intro" && !pendingPlay) return;
     mount(mode).then(function (instance) {
-      if (pendingPlay && instance && instance.playVideo) instance.playVideo();
+      if (!pendingPlay || !instance) return;
+      if (mode === "intro") beginRealIntro(instance);
+      else if (instance.playVideo) instance.playVideo();
     });
   };
 
   playBtn.addEventListener("click", onPlay);
+  pauseBtn.addEventListener("click", togglePlay);
+  backBtn.addEventListener("click", function () { seekBy(-10); });
+  forwardBtn.addEventListener("click", function () { seekBy(10); });
+  scrub.addEventListener("pointerdown", function () { scrubbing = true; });
+  scrub.addEventListener("pointerup", function () { scrubbing = false; });
+  scrub.addEventListener("input", onScrub);
+  scrub.addEventListener("change", function () {
+    scrubbing = false;
+    onScrub();
+  });
   form.addEventListener("submit", onSubmit);
   cueBtn.addEventListener("click", onCueClick);
   cueDismiss.addEventListener("click", hideCue);
@@ -86,7 +111,34 @@
       }
       return;
     }
+    if (mode === "intro") {
+      if (player) beginRealIntro(player);
+      else if (apiReady) mount("intro").then(function (instance) {
+        if (instance) beginRealIntro(instance);
+      });
+      return;
+    }
     if (player && typeof player.playVideo === "function") player.playVideo();
+  }
+
+  function beginRealIntro(instance) {
+    const target = instance || player;
+    if (!target) return;
+    if (typeof target.seekTo === "function") target.seekTo(0, true);
+    if (typeof target.unMute === "function") target.unMute();
+    if (typeof target.setVolume === "function") target.setVolume(100);
+    if (typeof target.playVideo === "function") target.playVideo();
+  }
+
+  function playCover() {
+    if (!cover || poster.hidden || poster.classList.contains("is-continue")) return;
+    const pending = cover.play();
+    if (pending && pending.catch) pending.catch(function () {});
+  }
+
+  function stopCover() {
+    if (!cover || cover.paused) return;
+    cover.pause();
   }
 
   function onSubmit(event) {
@@ -96,30 +148,24 @@
     if (!name) return showError("Escreva seu nome.");
     if (!whatsapp) return showError("Confira o WhatsApp com DDD.");
     showError("");
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Liberando…";
 
     const proposedId = uuid();
-    track("identify", { leadId: proposedId, name: name, whatsapp: whatsapp })
+    capture = track("identify", { leadId: proposedId, name: name, whatsapp: whatsapp })
       .then(function (result) {
-        if (!result || !result.id) throw new Error("capture_failed");
+        if (!result || !result.id) return null;
         saveLead({ id: result.id, name: name, whatsapp: whatsapp });
         if (window.fbq) window.fbq("track", "Lead");
-        return startLesson();
-      })
-      .catch(function () {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Continuar a aula";
-        showError("Não foi possível liberar agora. Tente de novo.");
+        return result;
       });
+    startLesson();
+    syncLessonBar();
   }
 
   function startLesson() {
     mode = "lesson";
     hideForm();
     hideCue();
-    playLabel.textContent = "Toque para assistir";
-    showPoster();
+    hidePoster();
     pendingPlay = true;
     if (!aula.lessonVideoId) {
       showMissing();
@@ -127,7 +173,18 @@
     }
     return mount("lesson").then(function (instance) {
       if (instance && instance.playVideo) instance.playVideo();
+      window.setTimeout(function () {
+        if (!playing) showContinue();
+      }, 1200);
     });
+  }
+
+  function showContinue() {
+    if (playing || mode !== "lesson") return;
+    playLabel.textContent = "Continuar a aula";
+    stopCover();
+    poster.classList.add("is-continue");
+    poster.hidden = false;
   }
 
   function mount(kind) {
@@ -174,7 +231,7 @@
       base.controls = 0;
       base.disablekb = 1;
     } else {
-      base.controls = 1;
+      base.controls = 0;
       base.disablekb = 0;
     }
     return base;
@@ -199,6 +256,7 @@
         track("lesson_start", snapshot());
       }
       startTimer();
+      syncLessonBar();
       return;
     }
 
@@ -206,6 +264,7 @@
     playing = false;
     lastSample = null;
     stopTimer();
+    syncLessonBar();
     if (mode === "lesson") sendProgress();
 
     if (state === endedState) {
@@ -241,9 +300,47 @@
     lastSample = t;
     if (t > maxTime) maxTime = t;
     if (mode !== "lesson") return;
+    syncScrub(t, d);
     checkMilestones();
     checkCues(t);
     if (Date.now() - progressSentAt >= 15000) sendProgress();
+  }
+
+  function syncLessonBar() {
+    controls.hidden = mode !== "lesson";
+    pauseBtn.textContent = playing ? "Pausar" : "Continuar";
+  }
+
+  function togglePlay() {
+    if (!player) return;
+    if (playing && typeof player.pauseVideo === "function") player.pauseVideo();
+    else if (typeof player.playVideo === "function") player.playVideo();
+  }
+
+  function seekBy(delta) {
+    const length = safeDuration() || duration;
+    let next = safeTime() + delta;
+    if (next < 0) next = 0;
+    if (length && next > length) next = length;
+    seekToTime(next);
+  }
+
+  function seekToTime(seconds) {
+    if (!player || typeof player.seekTo !== "function") return;
+    const spot = Math.max(0, seconds);
+    player.seekTo(spot, true);
+    lastSample = spot;
+  }
+
+  function onScrub() {
+    seekToTime(Number(scrub.value) || 0);
+  }
+
+  function syncScrub(time, total) {
+    if (scrubbing) return;
+    const length = total || duration || 0;
+    if (length > 0) scrub.max = String(Math.floor(length));
+    scrub.value = String(Math.floor(Math.max(0, time || 0)));
   }
 
   function checkMilestones() {
@@ -347,6 +444,14 @@
   }
 
   function track(event, extra, opts) {
+    const needsLead = event !== "identify" && event !== "intro_started" && event !== "intro_completed";
+    if (needsLead && !readLead() && capture) {
+      return capture.then(function () {
+        if (!readLead()) return false;
+        return track(event, extra, opts);
+      });
+    }
+
     const body = { event: event, sessionId: sessionId };
     const lead = readLead();
     if (lead && lead.id) body.leadId = lead.id;
@@ -398,6 +503,8 @@
 
   function hidePoster() {
     poster.hidden = true;
+    poster.classList.remove("is-continue");
+    stopCover();
   }
 
   function showMissing() {

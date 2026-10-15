@@ -28,14 +28,20 @@
 
 .aula-poster,
 .aula-form,
+.aula-controls,
 .aula-cue,
 .aula-missing {
   position: absolute;
   z-index: 3;
 }
 
+.aula-controls {
+  z-index: 5;
+}
+
 .aula-poster[hidden],
 .aula-form[hidden],
+.aula-controls[hidden],
 .aula-cue[hidden],
 .aula-missing[hidden] {
   display: none !important;
@@ -48,10 +54,58 @@
   justify-content: space-between;
   gap: 1.5rem;
   padding: 1.35rem 1.15rem 1.6rem;
-  background:
-    linear-gradient(180deg, rgba(11, 31, 74, 0.55) 0%, rgba(11, 31, 74, 0.08) 42%, rgba(11, 31, 74, 0.72) 100%),
-    linear-gradient(165deg, #0259dd 0%, #12356f 48%, #0b1f4a 100%);
+  background: none;
   color: #fff;
+}
+
+.aula-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.aula-poster.is-continue .aula-cover {
+  display: none;
+}
+
+.aula-poster__copy,
+.aula-play {
+  position: relative;
+  z-index: 1;
+}
+
+.aula-poster__copy {
+  margin: -1.35rem -1.15rem 0;
+  padding: 1.35rem 1.15rem 0.35rem;
+  background: rgba(11, 31, 74, 0.75);
+}
+
+.aula-poster__copy::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 5.5rem;
+  background: linear-gradient(180deg, rgba(11, 31, 74, 0.75) 0%, rgba(11, 31, 74, 0) 100%);
+  pointer-events: none;
+}
+
+.aula-poster.is-continue {
+  justify-content: center;
+  background: rgba(11, 31, 74, 0.28);
+}
+
+.aula-poster.is-continue .aula-poster__copy {
+  display: none;
+}
+
+.aula-poster.is-continue .aula-play {
+  margin-bottom: 0;
 }
 
 .aula-poster__kicker {
@@ -196,10 +250,51 @@
   cursor: default;
 }
 
+.aula-controls {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.7rem 0.75rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, rgba(11, 31, 74, 0) 0%, rgba(11, 31, 74, 0.92) 28%);
+}
+
+.aula-controls__actions {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 0.45rem;
+}
+
+.aula-controls button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.aula-controls button:hover {
+  background: #fff;
+}
+
+.aula-controls input[type="range"] {
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  accent-color: var(--cta);
+  cursor: pointer;
+}
+
 .aula-cue {
   left: 0.75rem;
   right: 0.75rem;
-  bottom: 4.5rem;
+  bottom: 8.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -236,6 +331,19 @@
 
 .aula-offer {
   padding: 2.25rem 0 3rem;
+}
+
+.aula-offer .eyebrow {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.aula-poster-offer {
+  display: block;
+  width: min(100%, 26rem);
+  height: auto;
+  margin: 0 auto 1.5rem;
+  border-radius: var(--radius);
 }
 
 .aula-offer.is-hot .btn--cta {

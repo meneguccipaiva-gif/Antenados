@@ -13,6 +13,7 @@ window.ANTENADOS = {
   aula: {
     introVideoId: "6VkzQVNDeX0",
     lessonVideoId: "_RDDF9B3dfA",
+    coverSrc: "videos/thumb.mp4",
     // Preencher depois do corte, em segundos.
     // action "intent" grava o clique e fica na página.
     // action "checkout" grava e abre a Hotmart. O último momento deve ser checkout.

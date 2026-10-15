@@ -56,6 +56,15 @@
           <div id="aula-player"></div>
 
           <div class="aula-poster" id="aula-poster">
+            <video
+              class="aula-cover"
+              id="aula-cover"
+              muted
+              loop
+              playsinline
+              autoplay
+              aria-hidden="true"
+            ></video>
             <div class="aula-poster__copy">
               <p class="aula-poster__kicker">Aula gratuita · IA para Antenados</p>
               <h1 id="aula-title">Restaure fotos antigas pelo WhatsApp.</h1>
@@ -74,9 +83,9 @@
           </div>
 
           <form class="aula-form" id="aula-form" hidden>
-            <h2>Continue a aula</h2>
+            <h2>Vamos começar?</h2>
             <p class="aula-form__lede">
-              Deixe seu nome e WhatsApp para assistir o restante.
+              Deixe seu nome e Whatsapp para dar início a aula.
             </p>
             <label class="aula-field">
               <span>Nome</span>
@@ -112,6 +121,23 @@
             </p>
           </form>
 
+          <div class="aula-controls" id="aula-controls" hidden>
+            <div class="aula-controls__actions">
+              <button type="button" id="aula-back">Voltar</button>
+              <button type="button" id="aula-pause">Pausar</button>
+              <button type="button" id="aula-forward">Avançar</button>
+            </div>
+            <input
+              type="range"
+              id="aula-scrub"
+              min="0"
+              max="0"
+              value="0"
+              step="1"
+              aria-label="Posição do vídeo"
+            />
+          </div>
+
           <div class="aula-cue" id="aula-cue" hidden>
             <button type="button" class="btn btn--cta btn--block" id="aula-cue-btn">
               Quero o IA para Antenados
@@ -129,8 +155,16 @@
 
       <section class="aula-offer" id="oferta" aria-labelledby="offer-title">
         <div class="wrap">
-          <p class="eyebrow">Oferta</p>
+          <p class="eyebrow">Aprenda Inteligência Artificial</p>
           <h2 id="offer-title">Comece hoje, com garantia</h2>
+
+          <img
+            class="aula-poster-offer"
+            src="images/aula-cartaz.jpg"
+            width="1024"
+            height="1024"
+            alt="IA para Antenados. Aprenda IA no celular, aulas de 3 a 7 minutos. Pedir ajuda do jeito certo, escrever mensagens, criar receitas, planejar eventos e viagens, entender cartas, bulas e contratos, criar e restaurar imagens, e reconhecer golpes digitais."
+          />
 
           <div class="offer-glow">
             <div class="offer-card">
